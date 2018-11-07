@@ -58,7 +58,7 @@ typings/
 .env
 
 # distribution
-dist/
+# dist/
 
 # IDE
 .vscode
