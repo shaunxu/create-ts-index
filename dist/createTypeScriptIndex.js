@@ -33,6 +33,8 @@ function indexWriter(directory, directories, option) {
         const statFunc = util.promisify(fs.stat);
         const indexFiles = option.targetExts.map(targetExt => `index.${targetExt}`);
         try {
+            if (directory === `.`)
+                return;
             console.log(chalk.default.yellow("Current working: ", directory));
             const resolvePath = path.resolve(option.globOptions.cwd);
             const elements = yield readDirFunc(path.join(resolvePath, directory));
