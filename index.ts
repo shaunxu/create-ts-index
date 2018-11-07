@@ -1,1 +1,1 @@
-export * from './createTypeScriptIndex';
+export * from "./createTypeScriptIndex";

@@ -1,9 +1,9 @@
-import * as moment from 'moment';
-import * as util from 'util';
-import * as glob from 'glob';
-import * as fs from 'fs';
-import * as chalk from 'chalk';
-import * as path from 'path';
+import * as moment from "moment";
+import * as util from "util";
+import * as glob from "glob";
+import * as fs from "fs";
+import * as chalk from "chalk";
+import * as path from "path";
 
 export interface ICreateTsIndexOption {
   fileFirst?: boolean;
@@ -18,7 +18,7 @@ export interface ICreateTsIndexOption {
 }
 
 function addDot(ext: string) {
-  if (ext.startsWith('.')) {
+  if (ext.startsWith(".")) {
     return ext;
   }
 
@@ -27,7 +27,7 @@ function addDot(ext: string) {
 
 function addNewline(option: ICreateTsIndexOption, data: string) {
   if (option.addNewline) {
-    return data + '\n';
+    return data + "\n";
   }
 
   return data;
@@ -44,7 +44,7 @@ export async function indexWriter(
   const indexFiles = option.targetExts.map(targetExt => `index.${targetExt}`);
 
   try {
-    console.log(chalk.default.yellow('Current working: ', directory));
+    console.log(chalk.default.yellow("Current working: ", directory));
 
     const resolvePath = path.resolve(option.globOptions.cwd);
     const elements = await readDirFunc(path.join(resolvePath, directory));
@@ -106,27 +106,27 @@ export async function indexWriter(
       let targetFileWithoutExt = target;
 
       option.targetExts.forEach((ext) => {
-        return targetFileWithoutExt = targetFileWithoutExt.replace(addDot(ext), '');
+        return targetFileWithoutExt = targetFileWithoutExt.replace(addDot(ext), "");
       });
 
       if (option.useSemicolon) {
-        return `export * from './${targetFileWithoutExt}';`;
+        return `export * from "./${targetFileWithoutExt}";`;
       }
 
-      return `export * from './${targetFileWithoutExt}'`;
+      return `export * from "./${targetFileWithoutExt}"`;
     });
 
     const comment = (() => {
       if (option.useTimestamp) {
-        return `// created from 'create-ts-index' ${moment(new Date()).format('YYYY-MM-DD HH:mm')}\n\n`; // tslint:disable-line
+        return `// created from "create-ts-index" ${moment(new Date()).format("YYYY-MM-DD HH:mm")}\n\n`; // tslint:disable-line
       }
-      return `// created from 'create-ts-index'\n\n`; // tslint:disable-line
+      // return `// created from "create-ts-index"\n\n`; // tslint:disable-line
     })();
 
-    const fileContent = comment + addNewline(option, exportString.join('\n'));
-    await writeFileFunc(path.join(resolvePath, directory, 'index.ts'), fileContent, 'utf8');
+    const fileContent = comment + addNewline(option, exportString.join("\n"));
+    await writeFileFunc(path.join(resolvePath, directory, "index.ts"), fileContent, "utf8");
   } catch (err) {
-    console.log(chalk.default.red('indexWriter: ', err.message));
+    console.log(chalk.default.red("indexWriter: ", err.message));
   }
 }
 
@@ -148,12 +148,12 @@ export async function createTypeScriptIndex(_option: ICreateTsIndexOption): Prom
     option.globOptions.nonull = option.globOptions.nonull || true;
     option.globOptions.dot = option.globOptions.dot || true;
     option.excludes = option.excludes || [
-      '@types', 'typings', '__test__', '__tests__', 'node_modules',
+      "@types", "typings", "__test__", "__tests__", "node_modules",
     ];
-    option.targetExts = option.targetExts || ['ts', 'tsx'];
+    option.targetExts = option.targetExts || ["ts", "tsx"];
     option.targetExts = option.targetExts.sort((l, r) => r.length - l.length);
 
-    const targetFileGlob = option.targetExts.map(ext => `*.${ext}`).join('|');
+    const targetFileGlob = option.targetExts.map(ext => `*.${ext}`).join("|");
     const globFunc = util.promisify<string, glob.IOptions, string[]>(glob);
     const allTsFiles = await globFunc(`**/+(${targetFileGlob})`, option.globOptions);
 
@@ -169,7 +169,7 @@ export async function createTypeScriptIndex(_option: ICreateTsIndexOption): Prom
       })
 
       // Step 2, remove declare file(*.d.ts)
-      .filter(tsFilePath => !tsFilePath.endsWith('.d.ts'))
+      .filter(tsFilePath => !tsFilePath.endsWith(".d.ts"))
 
       // Step 3, remove exclude pattern
       .filter((tsFilePath) => {
@@ -220,7 +220,7 @@ export async function createTypeScriptIndex(_option: ICreateTsIndexOption): Prom
     const tsDirs = Array.from<string>(dirSet);
 
     if (option.includeCWD) {
-      tsDirs.push('.');
+      tsDirs.push(".");
     }
 
     tsDirs.sort((left: string, right: string): number => {

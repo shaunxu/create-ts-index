@@ -7,7 +7,7 @@ npm install create-ts-index --save-dev
 ```
 
 # Introduction
-Index.ts file create for export syntax. If don't have business logic in index.ts that use to only export. In this case, more than easy importing and library project need this export process(for example, blueprint.js etc ...). cti(create-ts-index) create export index.ts file.
+Index.ts file create for export syntax. If don"t have business logic in index.ts that use to only export. In this case, more than easy importing and library project need this export process(for example, blueprint.js etc ...). cti(create-ts-index) create export index.ts file.
 
 For example, sample directory below.
 
@@ -25,16 +25,16 @@ create-ts-index create index.ts file below.
   src/
     app.ts
     > index.ts
-      // created from 'create-ts-index'
-      export * from './component';
-      export * from './app';
+      // created from "create-ts-index"
+      export * from "./component";
+      export * from "./app";
     component/
       Nav.ts
       Button.ts
       > index.ts
-        // created from 'create-ts-index'
-        export * from './Nav';
-        export * from './Button';
+        // created from "create-ts-index"
+        export * from "./Nav";
+        export * from "./Button";
 ```
 
 # Option
@@ -44,9 +44,9 @@ create-ts-index create index.ts file below.
 * `useSemicolon?: boolean` deside use semicolon line ending. default true
 * `useTimestamp?: boolean` deside use timestamp(YYYY-MM-DD HH:mm) top line comment. default false
 * `includeCWD?: boolean` deside include cwd directory. default true
-* `excludes?: string[]` pass exclude directory. default exclude directory is `['@types', 'typings', '__test__', '__tests__']`
+* `excludes?: string[]` pass exclude directory. default exclude directory is `["@types", "typings", "__test__", "__tests__"]`
 * `fileExcludePatterns?: string[]` pass exclude filename pattern. default exclude patterns is `[]`
-* `targetExts?: string[]` pass include extname. default extname is `['ts', 'tsx']`. extname pass without dot charactor.
+* `targetExts?: string[]` pass include extname. default extname is `["ts", "tsx"]`. extname pass without dot charactor.
 * `globOptions?: glob.IOptions` pass include glob options. [node-glob](https://github.com/isaacs/node-glob) option use it.
 
 ## cli (use it cti)
@@ -55,9 +55,9 @@ create-ts-index create index.ts file below.
 * `-s --usesemicolon` deside use semicolon line ending. no option true, option false
 * `-t --usetimestamp` deside use timestamp(YYYY-MM-DD HH:mm) top line comment. no option false, option true
 * `-c --includecwd` deside include cwd directory. no option true, option true
-* `-e --excludes [comma separated exclude directories]` pass exclude directory. default exclude directory is `['@types', 'typings', '__test__', '__tests__']`
+* `-e --excludes [comma separated exclude directories]` pass exclude directory. default exclude directory is `["@types", "typings", "__test__", "__tests__"]`
 * `-i --fileexcludes [comma separated extname]` pass exclude filename pattern. default exclude patterns is `[]`
-* `-x --targetexts [comma separated extname]` pass include extname. default extname is `['ts', 'tsx']`. extname pass without dot charactor.
+* `-x --targetexts [comma separated extname]` pass include extname. default extname is `["ts", "tsx"]`. extname pass without dot charactor.
 
 # Usage
 ## library
@@ -72,8 +72,8 @@ option.fileExcludePatterns = [];
 option.globOptions.cwd = process.cwd();
 option.globOptions.nonull = true;
 option.globOptions.dot = true;
-option.excludes = ['@types', 'typings', '__test__', '__tests__'];
-option.targetExts = ['ts', 'tsx'];
+option.excludes = ["@types", "typings", "__test__", "__tests__"];
+option.targetExts = ["ts", "tsx"];
 
 (async () => {
   await createTypeScriptIndex(option);
