@@ -120,7 +120,7 @@ export async function indexWriter(
       if (option.useTimestamp) {
         return `// created from "create-ts-index" ${moment(new Date()).format("YYYY-MM-DD HH:mm")}\n\n`; // tslint:disable-line
       }
-      // return `// created from "create-ts-index"\n\n`; // tslint:disable-line
+      return ``; // tslint:disable-line
     })();
 
     const fileContent = comment + addNewline(option, exportString.join("\n"));

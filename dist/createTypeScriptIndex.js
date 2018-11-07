@@ -82,7 +82,7 @@ function indexWriter(directory, directories, option) {
                 if (option.useTimestamp) {
                     return `// created from "create-ts-index" ${moment(new Date()).format("YYYY-MM-DD HH:mm")}\n\n`; // tslint:disable-line
                 }
-                // return `// created from "create-ts-index"\n\n`; // tslint:disable-line
+                return ``; // tslint:disable-line
             })();
             const fileContent = comment + addNewline(option, exportString.join("\n"));
             yield writeFileFunc(path.join(resolvePath, directory, "index.ts"), fileContent, "utf8");
